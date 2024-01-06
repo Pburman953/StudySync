@@ -17,12 +17,31 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.reminderspage.SecondFragment"
+        android:name="com.example.reminderspage.CreateReminderFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_createreminder">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_ManageReminderFragment"
+            app:destination="@id/manageReminder"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/manageReminder"
+        android:name="com.example.reminderspage.ManageReminderFragment"
+        android:label="manageReminder"
+        tools:layout="@layout/fragment_managereminders">
+        <action
+            android:id="@+id/action_ManageReminder_to_FirstFragment"
+            app:destination="@id/FirstFragment"
+            />
+
+        <action
+            android:id="@+id/action_ManageReminder_to_SecondFragment"
+            app:destination="@id/SecondFragment"/>
+    </fragment>
+
 </navigation>
