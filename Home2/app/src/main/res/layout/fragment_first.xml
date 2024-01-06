@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange"
+    tools:context=".FirstFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/Nature"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nature"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/View"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            app:cardElevation="10dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/Nature"
+            app:layout_constraintBottom_toBottomOf="@id/Nature"
+            android:translationY="50dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/man"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Smith"
+                    android:textSize="15dp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/remindersLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/View"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_first">
+
+        <!-- First Reminder -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/morining"
+                android:layout_gravity="center_vertical"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:text="Morning"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/midday"
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="70dp"
+                    android:text="Midday"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/night"
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="8dp" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="70dp"
+                    android:text="Night"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            app:cardElevation="10dp"
+            app:layout_constraintStart_toEndOf="@id/remindersLayout"
+            app:layout_constraintTop_toTopOf="@id/remindersLayout"
+            android:layout_marginStart="50dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/clock"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Screen time"
+                android:textSize="15dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="150dp"
+        android:id="@+id/notesTextView"
+        android:layout_height="190dp"
+        android:layout_weight="1"
+        android:text="Notes : lorenifeenonowgbwilbweiubwl;uLBHLIEBI"
+        android:textColor="@color/black"
+        android:gravity="start"
+        app:layout_constraintTop_toBottomOf="@id/remindersLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp" />
+
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Reminders"
+            app:layout_constraintTop_toBottomOf="@id/remindersLayout"
+            app:layout_constraintStart_toEndOf="@id/remindersLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/button_three"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            app:layout_constraintTop_toBottomOf="@id/button_first"
+            app:layout_constraintStart_toEndOf="@id/remindersLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/button_calender"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            app:layout_constraintTop_toBottomOf="@id/remindersLayout"
+            app:layout_constraintStart_toEndOf="@id/remindersLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="140dp" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
