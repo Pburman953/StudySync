@@ -1,5 +1,6 @@
 package com.example.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -18,11 +19,13 @@ import com.example.home.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    Button Tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAnchorView(R.id.fab)
                         .setAction("Action", null).show();
+            }
+        });
+        Tracker = findViewById(R.id.button_calender);
+        Tracker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Tracker.class);
+                startActivity(intent);
             }
         });
     }
