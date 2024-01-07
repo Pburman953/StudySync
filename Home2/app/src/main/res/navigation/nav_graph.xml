@@ -3,26 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/DashbaordFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.home.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/DashbaordFragment"
+        android:name="com.example.home.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_DashboardFragment_to_CreateReminderFragment"
+            app:destination="@id/CreateReminderFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.home.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id = "@+id/CreateReminderFragment"
+        android:name="com.example.home.CreateReminderFragment"
+        android:label="CreateReminderFragment"
+        tools:layout="@layout/fragment_createreminder">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_CreateReminderFragment_to_ManageReminderFragment"
+            app:destination="@id/ManageReminderFragment"/>
+        <action
+            android:id="@+id/action_CreateReminderFragment_to_DashboardFragment"
+            app:destination="@id/DashbaordFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/ManageReminderFragment"
+        android:name="com.example.home.ManageReminderFragment"
+        android:label="ManageReminderFragment"
+        tools:layout="@layout/fragment_managereminders">
+        <action
+            android:id="@+id/action_ManageReminder_to_CreateReminderFragment"
+            app:destination="@id/CreateReminderFragment"/>
+        <action
+            android:id="@+id/action_ManageReminder_to_DashboardFragment"
+            app:destination="@id/DashbaordFragment"/>
+
+
     </fragment>
 </navigation>
