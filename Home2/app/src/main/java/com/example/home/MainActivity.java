@@ -20,12 +20,13 @@ import com.example.home.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    Button Tracker;
+    ImageView Tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        Tracker = findViewById(R.id.button_calender);
+        Tracker = findViewById(R.id.ScreenTime);
         Tracker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

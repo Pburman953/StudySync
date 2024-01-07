@@ -136,10 +136,12 @@
             android:layout_marginStart="50dp">
 
             <ImageView
+                android:id="@+id/ScreenTime"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/clock"
-                android:scaleType="centerCrop" />
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/clock" />
 
             <TextView
                 android:layout_width="wrap_content"
