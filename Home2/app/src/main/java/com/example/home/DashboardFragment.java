@@ -36,6 +36,14 @@ public class DashboardFragment extends Fragment {
                         .navigate(R.id.action_DashboardFragment_to_CreateReminderFragment);
             }
         });
+
+        binding.buttonNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_DashboardFragment_to_notesFragment);
+            }
+        });
     }
 
     @Override

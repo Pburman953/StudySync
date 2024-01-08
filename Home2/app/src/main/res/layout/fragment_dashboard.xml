@@ -175,7 +175,7 @@
             android:layout_marginTop="16dp" />
 
         <Button
-            android:id="@+id/button_three"
+            android:id="@+id/button_notes"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Notes"

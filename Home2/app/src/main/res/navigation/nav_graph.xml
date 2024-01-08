@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_CreateReminderFragment"
             app:destination="@id/CreateReminderFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
     </fragment>
     <fragment
         android:id = "@+id/CreateReminderFragment"
@@ -41,5 +44,14 @@
             app:destination="@id/DashbaordFragment"/>
 
 
+    </fragment>
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.home.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_DashbaordFragment"
+            app:destination="@id/DashbaordFragment" />
     </fragment>
 </navigation>
