@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Booking History:"
+        android:text="Reminders:"
         android:textSize="34sp"
         android:textStyle="bold" />
 
