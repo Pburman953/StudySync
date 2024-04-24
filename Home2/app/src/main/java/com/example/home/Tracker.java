@@ -1,5 +1,6 @@
 package com.example.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AppOpsManager;
@@ -7,20 +8,35 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import android.Manifest;
+import android.widget.Toast;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 
 public class Tracker extends AppCompatActivity {
-
     private static final int REQUEST_PACKAGE_USAGE_STATS = 1;
 
     ListView listView;
+    BarChart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +44,7 @@ public class Tracker extends AppCompatActivity {
         setContentView(R.layout.activity_tracker);
 
         listView = findViewById(R.id.listView);
+        chart = findViewById(R.id.chart);
 
         // Check if the user has granted the PACKAGE_USAGE_STATS permission
         if (!hasPackageUsageStatsPermission()) {
@@ -70,31 +87,44 @@ public class Tracker extends AppCompatActivity {
 
     // Display the app usage stats in the ListView
     private void displayAppUsageStats() {
+        // Query and retrieve the app usage stats
         UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
+        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0, System.currentTimeMillis());
 
-        // Get the current time
-        long endTime = System.currentTimeMillis();
-        long startTime = endTime - 24 * 60 * 60 * 1000; // 24 hours ago
+// Create a BarDataSet with the package name as X axis and total time in foreground as Y axis
+        List<BarEntry> entries = new ArrayList<>();
+        List<String> labels = new ArrayList<>(); // Add a list to store the labels
 
-        // Get the app usage stats for the specified time range
-        List<UsageStats> usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime);
-
-        // Iterate through the app usage stats
-        List<String> data = new ArrayList<>();
-
-        // Iterate through the usageStatsList
-        for (UsageStats usageStats : usageStatsList) {
+        for (int i = 0; i < stats.size(); i++) {
+            UsageStats usageStats = stats.get(i);
             String packageName = usageStats.getPackageName();
-            long totalTimeInForeground = usageStats.getTotalTimeInForeground();
-
-            // Add the package name and total time in foreground to the data list
-            data.add("Package Name: " + packageName + "\nTotal Time in Foreground: " + totalTimeInForeground);
+            float totalTimeInForeground = usageStats.getTotalTimeInForeground();
+            totalTimeInForeground = totalTimeInForeground / 60000;
+            if (totalTimeInForeground > 1) {
+                entries.add(new BarEntry(i, totalTimeInForeground)); // Remove the packageName parameter from the constructor
+                labels.add(packageName); // Add the packageName to the labels list
+            }
         }
 
-        // Create an ArrayAdapter to bind the data to the ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+        BarDataSet dataSet = new BarDataSet(entries, "App Usage Stats");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextSize(12f);
 
-        // Set the adapter to the ListView
-        listView.setAdapter(adapter);
+        BarData barData = new BarData(dataSet);
+        chart.setData(barData);
+
+        Description description = new Description();
+        description.setText("App Usage Stats");
+        chart.setDescription(description);
+
+        XAxis xAxis = chart.getXAxis(); // Get the x-axis
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels)); // Set the labels for the x-axis
+        xAxis.setGranularity(1f); // Ensure labels are not skipped
+        xAxis.setCenterAxisLabels(true); // Center the labels on the bars
+        xAxis.setLabelCount(labels.size()); // Set the number of labels to display
+
+
     }
+
 }

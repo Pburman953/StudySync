@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/title"
@@ -14,9 +14,16 @@
         android:textStyle="bold"
         android:padding="16dp" />
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="532dp">
+
+    </com.github.mikephil.charting.charts.BarChart>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="100dp"></ListView>
 
 </LinearLayout>
