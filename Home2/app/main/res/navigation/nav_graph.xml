@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/DashbaordFragment">
+
+    <fragment
+        android:id="@+id/DashbaordFragment"
+        android:name="com.example.home.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_DashboardFragment_to_CreateReminderFragment"
+            app:destination="@id/CreateReminderFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
+    </fragment>
+    <fragment
+        android:id = "@+id/CreateReminderFragment"
+        android:name="com.example.home.CreateReminderFragment"
+        android:label="CreateReminderFragment"
+        tools:layout="@layout/fragment_createreminder">
+        <action
+            android:id="@+id/action_CreateReminderFragment_to_ManageReminderFragment"
+            app:destination="@id/ManageReminderFragment"/>
+        <action
+            android:id="@+id/action_CreateReminderFragment_to_DashboardFragment"
+            app:destination="@id/DashbaordFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/ManageReminderFragment"
+        android:name="com.example.home.ManageReminderFragment"
+        android:label="ManageReminderFragment"
+        tools:layout="@layout/fragment_managereminders">
+        <action
+            android:id="@+id/action_ManageReminder_to_CreateReminderFragment"
+            app:destination="@id/CreateReminderFragment"/>
+        <action
+            android:id="@+id/action_ManageReminder_to_DashboardFragment"
+            app:destination="@id/DashbaordFragment"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.home.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_DashbaordFragment"
+            app:destination="@id/DashbaordFragment" />
+    </fragment>
+</navigation>
