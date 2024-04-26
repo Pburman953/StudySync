@@ -46,7 +46,7 @@ public class CreateReminderFragment extends Fragment {
             }
         });
 
-        binding.buttonMakeReservation.setOnClickListener(new View.OnClickListener() {
+        binding.buttonCreateReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createReminder();
