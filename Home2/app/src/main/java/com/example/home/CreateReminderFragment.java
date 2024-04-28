@@ -1,10 +1,14 @@
 package com.example.home;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,44 +19,84 @@ import com.example.home.databinding.FragmentCreatereminderBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class CreateReminderFragment extends Fragment {
+public class CreateReminderFragment extends Fragment implements  View.OnClickListener {
 
+    Button btnDatePicker, btnTimePicker;
+    EditText txtDate, txtTime;
     private FragmentCreatereminderBinding binding;
+
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
+        super.onCreate(savedInstanceState);
+
+
+
+        btnDatePicker= btnDatePicker.findViewById(R.id.btn_date);
+        btnTimePicker= btnTimePicker.findViewById(R.id.btn_time);
+        txtDate= txtDate.findViewById(R.id.in_date);
+        txtTime= txtTime.findViewById(R.id.in_time);
+
+        btnDatePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(this);
         binding = FragmentCreatereminderBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
-        binding.BackReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(CreateReminderFragment.this)
-                        .navigate(R.id.action_CreateReminderFragment_to_DashboardFragment);
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        if(v == binding.buttonCreateReminder){createReminder();}
+        if(v == binding.BackReminder){
+            NavHostFragment.findNavController(CreateReminderFragment.this)
+                    .navigate(R.id.action_CreateReminderFragment_to_DashboardFragment);
+        }
+        if (v == btnDatePicker) {
 
-        binding.buttonCreateReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createReminder();
-            }
-        });
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
 
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this.requireContext(),
+                    (view, year, monthOfYear, dayOfMonth) -> txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this.requireContext(),
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
     }
 
     private void createReminder() {
@@ -148,5 +192,7 @@ public class CreateReminderFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 
 }

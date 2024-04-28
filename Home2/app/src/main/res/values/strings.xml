@@ -43,4 +43,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="select_date">SELECT DATE</string>
+    <string name="select_time">SELECT TIME</string>
+    <string name="make_reminder">Make Reminder</string>
+    <string name="back">Back</string>
+    <string name="description">Description</string>
+    <string name="reminder_name">Reminder Name</string>
+    <string name="create_reminder">Create Reminder</string>
 </resources>
