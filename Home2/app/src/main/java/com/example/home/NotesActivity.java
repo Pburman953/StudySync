@@ -2,17 +2,18 @@ package com.example.home;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class NotesFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class NotesActivity extends AppCompatActivity {
 
     private EditText inputText;
     private ListView noteListView;
@@ -20,21 +21,21 @@ public class NotesFragment extends Fragment {
     private SharedPreferences sharedPreferences;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_notes, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notes);
 
-        inputText = view.findViewById(R.id.editText);
-        noteListView = view.findViewById(R.id.noteListView);
+        inputText = findViewById(R.id.editText);
+        noteListView = findViewById(R.id.noteListView);
 
-        sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", requireActivity().MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
-        adapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         noteListView.setAdapter(adapter);
 
         String savedText = sharedPreferences.getString("savedText", "");
         String[] notesArray = savedText.split("\n");
-
-        adapter.addAll(notesArray);
+        adapter.addAll(new ArrayList<>(Arrays.asList(notesArray)));
 
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -45,19 +46,6 @@ public class NotesFragment extends Fragment {
                 saveNotesToSharedPreferences();
             }
         });
-
-        Button printButton = view.findViewById(R.id.submitNote);
-        printButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String enteredText = inputText.getText().toString();
-                adapter.insert(enteredText, 0);
-                saveNotesToSharedPreferences();
-                inputText.getText().clear();
-            }
-        });
-
-        return view;
     }
 
     private void saveNotesToSharedPreferences() {

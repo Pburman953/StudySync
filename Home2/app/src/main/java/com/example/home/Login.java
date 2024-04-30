@@ -33,13 +33,13 @@ public class Login extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 SharedPreferences sharedPreferences = getSharedPreferences("UserDetails", MODE_PRIVATE);
-                String savedEmail = sharedPreferences.getString("Email", "");
-                String savedPassword = sharedPreferences.getString("Password", "");
+                String savedEmail = sharedPreferences.getString("Email", "Admin@example.com");
+                String savedPassword = sharedPreferences.getString("Password", "Password");
 
                 if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
                     if (email.equals(savedEmail) && password.equals(savedPassword)) {
                         // Login successful
-                        Intent loginIntent = new Intent(Login.this, MainActivity.class);
+                        Intent loginIntent = new Intent(Login.this, DashboardActivity.class);
                         Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                         startActivity(loginIntent);
                         finish();
@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
                 } else {
                     if (email.equals("Admin@example.com") && password.equals("Password")) {
                         // Login successful
-                        Intent loginIntent = new Intent(Login.this, MainActivity.class);
+                        Intent loginIntent = new Intent(Login.this, DashboardActivity.class);
                         Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                         startActivity(loginIntent);
                         finish();

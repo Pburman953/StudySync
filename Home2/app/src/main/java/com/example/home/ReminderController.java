@@ -6,6 +6,7 @@ public class ReminderController {
 
 
 
+
     public static void deleteReminder(String nameToRemove) {
         Iterator<Reminder> iterator = Values.RemindersList.iterator();
         while (iterator.hasNext()) {
