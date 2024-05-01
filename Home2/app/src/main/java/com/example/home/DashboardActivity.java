@@ -14,14 +14,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.home.databinding.ActivityMainBinding;
 
 //import com.example.home.databinding.FragmentDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     ImageView Tracker;
 
@@ -50,6 +48,13 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, Tracker.class);
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.button_calender).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(DashboardActivity.this, ManageReminderActivity.class));
             }
         });
     }
