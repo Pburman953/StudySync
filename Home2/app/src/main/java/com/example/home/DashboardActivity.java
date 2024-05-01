@@ -14,14 +14,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.home.databinding.ActivityMainBinding;
 
 //import com.example.home.databinding.FragmentDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     ImageView Tracker;
 
