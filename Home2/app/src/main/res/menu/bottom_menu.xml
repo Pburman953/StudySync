@@ -13,7 +13,7 @@
         android:icon="@drawable/baseline_event_note_24"/>
 
     <item
-        android:id="fab"
+        android:id="@+id/fab"
         android:title=""
         android:enabled="true"/>
     <item

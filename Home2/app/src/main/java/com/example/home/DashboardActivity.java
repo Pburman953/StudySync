@@ -50,6 +50,13 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.button_calender).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(DashboardActivity.this, ManageReminderActivity.class));
+            }
+        });
     }
 
 
