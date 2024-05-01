@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="home"
+        android:icon="@drawable/baseline_home_24"/>
+
+
+    <item
+        android:id="@+id/notes"
+        android:title="Notes"
+        android:icon="@drawable/baseline_event_note_24"/>
+
+    <item
+        android:id="fab"
+        android:title=""
+        android:enabled="true"/>
+    <item
+        android:id="@+id/tracker"
+        android:title="Tracker"
+        android:icon="@drawable/baseline_track"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/baseline_settings_24"/>
+</menu>
