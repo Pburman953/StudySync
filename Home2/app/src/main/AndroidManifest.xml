@@ -23,7 +23,6 @@
             android:name=".ReminderReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
-
         <activity
             android:name=".RegisterPage"
             android:exported="false" />
