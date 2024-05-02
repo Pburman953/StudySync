@@ -175,14 +175,8 @@
                     android:layout_marginTop="16dp"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:id="@+id/calenderRecycleView"
-                />
+
+
 
         </LinearLayout>
 
