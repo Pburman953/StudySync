@@ -9,16 +9,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/framelayout"/>
+        android:id="@+id/framelayout"
+        android:background="@drawable/man"/>
 
 
 
-    <androidx.core.widget.NestedScrollView
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/man"
-        >
 
 
         <LinearLayout
@@ -188,7 +184,6 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
 
 
     <com.google.android.material.bottomappbar.BottomAppBar

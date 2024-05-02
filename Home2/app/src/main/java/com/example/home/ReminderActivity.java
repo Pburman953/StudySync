@@ -5,9 +5,11 @@ import static android.content.Context.ALARM_SERVICE;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
+import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,7 +18,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +43,10 @@ import java.util.regex.Pattern;
 
 public class ReminderActivity extends AppCompatActivity {
 
+
+    String formattedDate;
+    String formattedTime;
+
     private static final int REQUEST_NOTIFICATION = 490;
     private static final long DELAY_IN_MILLIS = 10000;
 
@@ -56,6 +65,13 @@ public class ReminderActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(channel);
         }
 
+        Button datePickerButton = findViewById(R.id.datePickerButton);
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimePicker();
+            }
+        });
         findViewById(R.id.BackReminder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +92,58 @@ public class ReminderActivity extends AppCompatActivity {
             requestNotificationPermission();
         }
     }
+
+    private void showDateTimePicker() {
+        // Get current date and time
+        Calendar calendar = Calendar.getInstance();
+
+        // Date picker dialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        formattedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
+
+                        // Now show time picker dialog
+                        showTimePicker();
+                    }
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        // Show date picker dialog
+        datePickerDialog.show();
+    }
+
+    private void showTimePicker() {
+        // Get current time
+        Calendar calendar = Calendar.getInstance();
+
+        // Time picker dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        // Handle selected time
+                        formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
+
+                        // For example, display them in a TextView
+                    }
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                false // 24-hour format
+        );
+
+        // Show time picker dialog
+        timePickerDialog.show();
+    }
+
     private boolean hasNotificationPermission() {
         boolean mode = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_GRANTED;
@@ -111,17 +179,16 @@ public class ReminderActivity extends AppCompatActivity {
 
         EditText reminderNameEditText = findViewById(R.id.editTextReminderName);
         EditText descriptionEditText = findViewById(R.id.editTextDescription);
-        EditText dateEditText = findViewById(R.id.editTextDate);
-        EditText timeEditText = findViewById(R.id.editTextTime);
 
-        if (!areInputsValid(reminderNameEditText, descriptionEditText, dateEditText, timeEditText)) {
+
+        if (!areInputsValid(reminderNameEditText, descriptionEditText)) {
             return; // Stop further execution if inputs are invalid
         }
         int reminderID = (int) System.currentTimeMillis() + new Random().nextInt(1000) ;
         String reminderName = reminderNameEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
-        String date = dateEditText.getText().toString();
-        String time = timeEditText.getText().toString();
+        String date = formattedDate;
+        String time = formattedTime;
 
         Reminder newReminder = new Reminder(reminderID ,reminderName, description, date, time);
 
@@ -175,7 +242,7 @@ public class ReminderActivity extends AppCompatActivity {
 
         ReminderController.addPendingIntent(newReminder.getreminderID(), notificationPending);
 
-        startActivity(new Intent(ReminderActivity.this, ManageReminderActivity.class));
+        startActivity(new Intent(ReminderActivity.this, DashboardActivity.class));
         newReminder.logReminder();
         finish();
     }
@@ -188,41 +255,12 @@ public class ReminderActivity extends AppCompatActivity {
                 String errorMessage = fieldLabel + " cannot be empty";
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
                 return false;
-            } else if (editText.getId() == R.id.editTextDate) {
-                if (!isValidDateFormat(input)) {
-                    Toast.makeText(this, "Invalid date format (yyyy-mm-dd)", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            } else if (editText.getId() == R.id.editTextTime) {
-                if (!isValidTimeFormat(input)) {
-                    Toast.makeText(this, "Invalid Time Format (XX:XX 24hr)", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
             }
         }
         return true;
     }
 
-    private boolean isValidDateFormat(String date) {
-        // Check if the date matches the specified format (yyyy-mm-dd)
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        sdf.setLenient(false);
-        try {
-            sdf.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
 
-    private boolean isValidTimeFormat(String timeString) {
-        // Check if the date matches the specified format (yyyy-mm-dd)
-        String regexPattern = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
-        Pattern pattern = Pattern.compile(regexPattern);
-        Matcher matcher = pattern.matcher(timeString);
-        return matcher.matches();
-    }
 
 
     private String getFieldLabel(EditText editText) {
@@ -230,10 +268,6 @@ public class ReminderActivity extends AppCompatActivity {
             return "Reminder name";
         } else if (editText.getId() == EditTextFieldNames.EDIT_TEXT_DESCRIPTION) {
             return "Description";
-        } else if (editText.getId() == EditTextFieldNames.EDIT_TEXT_DATE) {
-            return "Date";
-        } else if (editText.getId() == EditTextFieldNames.EDIT_TEXT_TIME) {
-            return "Time";
         } else {
             return "this field";
         }

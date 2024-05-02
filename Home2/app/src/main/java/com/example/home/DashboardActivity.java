@@ -9,11 +9,14 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.databinding.ActivityDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
 
     ActivityDashboardBinding binding;
 
@@ -24,29 +27,14 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
-
         RecyclerView recyclerView = findViewById(R.id.reminderHistory);
-        for (Reminder reminder : Values.RemindersList) {
-            Button button = new Button(this);
-            button.setText(String.format("%s - %n %s %n - %s - %s", reminder.getReminderName(),reminder.getDescription(),reminder.getDate(),reminder.getTime()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            layoutParams.setMargins(0, 0, 0, 8);
-
-            button.setLayoutParams(layoutParams);
-
-            recyclerView.addView(button);
-
+        int numButtons = Values.RemindersList.size();
+        if(Values.RemindersList.size() > 0) {
+            ButtonAdapter adapter = new ButtonAdapter(numButtons);
+            recyclerView.setAdapter(adapter);
         }
-
-
-
-
-
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 // Handle click on home item
@@ -57,7 +45,7 @@ public class DashboardActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
-                Intent notesIntent = new Intent(this, NotesActivity.class);
+                Intent notesIntent = new Intent(this, ManageReminderActivity.class);
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -79,10 +67,20 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerView recyclerView = findViewById(R.id.reminderHistory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
+
+        int numButtons = Values.RemindersList.size();
+        if(Values.RemindersList.size() > 0) {
+            ButtonAdapter adapter = new ButtonAdapter(numButtons);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+
 }

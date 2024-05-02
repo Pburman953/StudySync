@@ -50,7 +50,7 @@ public class ReminderController {
 
 
 
-    public static void deleteReminder(long reminderID) {
+    public static void deleteReminder(int reminderID) {
         Iterator<Reminder> iterator = Values.RemindersList.iterator();
         while (iterator.hasNext()) {
             Reminder reminder = iterator.next();
