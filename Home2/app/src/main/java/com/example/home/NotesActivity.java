@@ -84,7 +84,7 @@ public class NotesActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
-                Intent settingsIntent = new Intent(this, DashboardActivity.class);
+                Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
                 return true;
             }
