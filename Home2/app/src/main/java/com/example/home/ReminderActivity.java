@@ -30,6 +30,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +44,7 @@ public class ReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
-
+        Context context = this;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     "channel_id",
@@ -114,13 +116,13 @@ public class ReminderActivity extends AppCompatActivity {
         if (!areInputsValid(reminderNameEditText, descriptionEditText, dateEditText, timeEditText)) {
             return; // Stop further execution if inputs are invalid
         }
-
+        int reminderID = (int) System.currentTimeMillis() + new Random().nextInt(1000) ;
         String reminderName = reminderNameEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         String date = dateEditText.getText().toString();
         String time = timeEditText.getText().toString();
 
-        Reminder newReminder = new Reminder(reminderName, description, date, time);
+        Reminder newReminder = new Reminder(reminderID ,reminderName, description, date, time);
 
         Values.RemindersList.add(newReminder);
         Toast.makeText(this, "Reminder Created!", Toast.LENGTH_SHORT).show();
@@ -129,7 +131,7 @@ public class ReminderActivity extends AppCompatActivity {
         Intent notifationIntent = new Intent(this, ReminderReceiver.class);
         notifationIntent.putExtra("notificationTitle", reminderName);
         notifationIntent.putExtra("notificationText", description);
-        PendingIntent notificationPending = PendingIntent.getBroadcast(this, 1, notifationIntent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent notificationPending = PendingIntent.getBroadcast(getBaseContext(), newReminder.getreminderID(), notifationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -163,6 +165,7 @@ public class ReminderActivity extends AppCompatActivity {
                 notificationPending
         );
 
+        ReminderController.addPendingIntent(newReminder.getreminderID(), notificationPending);
 
         startActivity(new Intent(ReminderActivity.this, ManageReminderActivity.class));
         newReminder.logReminder();
@@ -226,5 +229,9 @@ public class ReminderActivity extends AppCompatActivity {
         } else {
             return "this field";
         }
+    }
+
+    public Context getActivityContext() {
+        return this;
     }
 }
