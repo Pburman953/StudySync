@@ -2,8 +2,14 @@ package com.example.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.databinding.ActivityDashboardBinding;
 
@@ -16,6 +22,26 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+
+        RecyclerView recyclerView = findViewById(R.id.reminderHistory);
+        for (Reminder reminder : Values.RemindersList) {
+            Button button = new Button(this);
+            button.setText(String.format("%s - %n %s %n - %s - %s", reminder.getReminderName(),reminder.getDescription(),reminder.getDate(),reminder.getTime()));
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins(0, 0, 0, 8);
+
+            button.setLayoutParams(layoutParams);
+
+            recyclerView.addView(button);
+
+        }
 
 
 
@@ -43,7 +69,7 @@ public class DashboardActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
-                Intent settingsIntent = new Intent(this, Login.class);
+                Intent settingsIntent = new Intent(this, ReminderActivity.class);
                 startActivity(settingsIntent);
                 return true;
             }
