@@ -47,13 +47,7 @@ public class ManageReminderActivity extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(android.view.MenuItem menuItem) {
-                            if (menuItem.getItemId() == R.id.editReminder) {
-                                ReminderController.cancelPendingIntent(getBaseContext(), reminder.getreminderID());
-                                ReminderController.deleteReminder(reminder.getreminderID());
-                                startActivity(new Intent(ManageReminderActivity.this, ReminderActivity.class));
-                                Toast.makeText(ManageReminderActivity.this, "Enter New Reminder Details", Toast.LENGTH_SHORT).show();
-                                return true;
-                            } else if (menuItem.getItemId() == R.id.deleteReminder) {
+                            if (menuItem.getItemId() == R.id.deleteReminder) {
                                 ReminderController.deleteReminder(reminder.getreminderID());
                                 Toast.makeText(ManageReminderActivity.this, "Reminder Deleted!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(ManageReminderActivity.this, DashboardActivity.class));

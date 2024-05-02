@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <item
-        android:id="@+id/editReminder"
-        android:title="Edit"
-        />
-    <item
         android:id="@+id/deleteReminder"
         android:title="Delete"
         />

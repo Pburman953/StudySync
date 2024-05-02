@@ -19,8 +19,9 @@ public class ReminderReceiver extends BroadcastReceiver {
         String notificationTitle = intent.getStringExtra("notificationTitle");
         String notificationDescription = intent.getStringExtra("notificationText");
         if (hasNotificationPermission(context)) {
-            // Show the notification
-            showNotification(context, notificationTitle, notificationDescription);
+            if(ReminderController.pendingIntentMap.containsKey(intent.getIntExtra("requestCode", 90))) {
+                showNotification(context, notificationTitle, notificationDescription);
+            }
         }
     }
 

@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -126,14 +127,18 @@ public class ReminderActivity extends AppCompatActivity {
 
         Values.RemindersList.add(newReminder);
         Toast.makeText(this, "Reminder Created!", Toast.LENGTH_SHORT).show();
-
-
-        Intent notifationIntent = new Intent(this, ReminderReceiver.class);
+        String message = "" + reminderID;
+        Log.d("improntnant", message);
+        Intent notifationIntent = new Intent(getApplicationContext(), ReminderReceiver.class);
         notifationIntent.putExtra("notificationTitle", reminderName);
         notifationIntent.putExtra("notificationText", description);
-        PendingIntent notificationPending = PendingIntent.getBroadcast(getBaseContext(), newReminder.getreminderID(), notifationIntent, PendingIntent.FLAG_IMMUTABLE);
+        notifationIntent.putExtra("requestCode", newReminder.getreminderID());
+        PendingIntent notificationPending = PendingIntent.getBroadcast(getApplicationContext(), newReminder.getreminderID(), notifationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        String message2 = "" + newReminder.getreminderID();
+        Log.d("improntnant", message2);
+
+        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
 
         String[] timeSplit = time.split(":");
         // Set the desired time for the notification (replace these values with your desired time)
@@ -164,6 +169,9 @@ public class ReminderActivity extends AppCompatActivity {
                 System.currentTimeMillis() + delayInMillis,
                 notificationPending
         );
+
+
+
 
         ReminderController.addPendingIntent(newReminder.getreminderID(), notificationPending);
 

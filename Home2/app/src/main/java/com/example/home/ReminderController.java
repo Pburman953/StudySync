@@ -3,6 +3,8 @@ package com.example.home;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.util.Log;
+
 import com.example.home.ReminderActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +14,10 @@ import java.util.Map;
 
 public class ReminderController {
 
-    private static Map<Integer, PendingIntent> pendingIntentMap = new HashMap<>();
+    public static Map<Integer, PendingIntent> pendingIntentMap = new HashMap<>();
 
     public static void addPendingIntent(int requestCode, PendingIntent pendingIntent) {
+        Log.d("verypiwngeoinrgoen", ""+requestCode);
         pendingIntentMap.put(requestCode, pendingIntent);
     }
 
@@ -27,11 +30,12 @@ public class ReminderController {
         if (pendingIntent != null) {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             if (alarmManager != null) {
+                String message = "" + requestCode;
+                Log.d("improtn", message);
                 alarmManager.cancel(pendingIntent);
             }
             pendingIntentMap.remove(requestCode);
         }
-        removePendingIntent(requestCode);
     }
 
     public static void cancelAllPendingIntents(Context context) {
