@@ -1,85 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lavender">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:id="@+id/framelayout"/>
 
+
+
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/man"
+        >
 
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
-            tools:layout_editor_absoluteX="16dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0sp"
+                android:background="@drawable/backcard"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/View"
+                    android:layout_width="83dp"
+                    android:layout_height="81dp"
+                    android:layout_marginStart="10dp"
+                    android:translationY="0dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/man" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="John Smith"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:layout_weight="0.333"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Reminders"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:padding="16dp" />
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Create Reminder"
-                android:textSize="34sp" />
+                android:layout_margin="16dp"
+                android:background="@drawable/backcard"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextReminderName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
-                android:hint="Reminder Name"
-                android:inputType="text" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Create Reminder"
+                    android:textSize="34sp" />
 
-            <EditText
-                android:id="@+id/editTextDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFFFFF"
-                android:hint="Description"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/editTextReminderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="Reminder Name"
+                    android:inputType="text" />
 
-            <EditText
-                android:id="@+id/editTextDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Date"
-                android:backgroundTint="#FFFFFF"
+                <EditText
+                    android:id="@+id/editTextDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="Description"
+                    android:inputType="text" />
 
-                android:calendarViewShown="true"
-                android:datePickerMode="spinner" />
+                <EditText
+                    android:id="@+id/editTextDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date"
+                    android:backgroundTint="#FFFFFF"
 
-            <EditText
-                android:id="@+id/editTextTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Time"
-                android:backgroundTint="#FFFFFF"
-                android:calendarViewShown="true"
-                />
+                    android:calendarViewShown="true"
+                    android:datePickerMode="spinner" />
+
+                <EditText
+                    android:id="@+id/editTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Time"
+                    android:backgroundTint="#FFFFFF"
+                    android:calendarViewShown="true"
+                    />
 
 
-            <Button
-                android:id="@+id/buttonMakeReservation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Make Reminder" />
+                <Button
+                    android:id="@+id/buttonMakeReservation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Make Reminder" />
 
-            <Button
-                android:id="@+id/BackReminder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Back" />
+                <Button
+                    android:id="@+id/BackReminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Back" />
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
         </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomappbar"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="50dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomnavigation"
+            android:layout_marginEnd="20dp"
+            app:labelVisibilityMode="labeled"
+            android:background="@android:color/transparent"
+            app:menu="@menu/bottom_menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/baseline_add_24"
+        app:layout_anchor="@id/bottomappbar"
+        android:id="@+id/plus"
+        app:maxImageSize="40dp"
+        app:tint ="@color/lavender"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
