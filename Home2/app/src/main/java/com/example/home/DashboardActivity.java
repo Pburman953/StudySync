@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import com.example.home.databinding.ActivityDashboardBinding;
 
@@ -30,11 +32,24 @@ public class DashboardActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.reminderHistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
+
+
+
         int numButtons = Values.RemindersList.size();
         if(Values.RemindersList.size() > 0) {
             ButtonAdapter adapter = new ButtonAdapter(numButtons);
             recyclerView.setAdapter(adapter);
+
         }
+        FloatingActionButton fab = findViewById(R.id.plus);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Replace 'YourActivity' with the name of your activity or fragment class
+                Intent intent = new Intent(DashboardActivity.this, ReminderActivity.class);
+                startActivity(intent);
+            }
+        });
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 // Handle click on home item
@@ -45,7 +60,7 @@ public class DashboardActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
-                Intent notesIntent = new Intent(this, ManageReminderActivity.class);
+                Intent notesIntent = new Intent(this, NotesActivity.class);
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -57,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
-                Intent settingsIntent = new Intent(this, ReminderActivity.class);
+                Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
                 return true;
             }

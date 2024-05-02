@@ -4,6 +4,22 @@
         <item name="colorPrimary">@color/lavender</item>
         <item name="colorPrimaryVariant">@color/lavender</item>
     </style>
+<!-- lightmode-->
+
+    <style name="Screen">
+        <item name="colorPrimary">@color/lavender</item>
+        <item name="colorPrimaryVariant">@color/lavender</item>
+        <item name="android:background">#FFF</item>
+    </style>
+
+
+    <style name="Text">
+        <item name="android:textColor">#000</item>
+
+    </style>
+
+
+
 
     <style name="Theme.Home" parent="Base.Theme.Home" />
 </resources>

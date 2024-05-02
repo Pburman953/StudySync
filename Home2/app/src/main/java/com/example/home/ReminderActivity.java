@@ -30,7 +30,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-//import com.example.home.databinding.FragmentCreatereminderBinding;
+
+import com.example.home.databinding.ActivityReminderBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,13 +49,16 @@ public class ReminderActivity extends AppCompatActivity {
     String formattedDate;
     String formattedTime;
 
+    ActivityReminderBinding binding;
+
     private static final int REQUEST_NOTIFICATION = 490;
     private static final long DELAY_IN_MILLIS = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminder);
+        binding = ActivityReminderBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Context context = this;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -91,6 +96,49 @@ public class ReminderActivity extends AppCompatActivity {
         if (!hasNotificationPermission()) {
             requestNotificationPermission();
         }
+
+
+
+        FloatingActionButton fab = findViewById(R.id.plus);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Replace 'YourActivity' with the name of your activity or fragment class
+                Intent intent = new Intent(ReminderActivity.this, ReminderActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                Intent homeIntent = new Intent(this, DashboardActivity.class);
+                startActivity(homeIntent);
+                return true;
+            } else if (item.getItemId() == R.id.notes) {
+                // Handle click on notes item
+                // Start another activity similarly
+                Intent notesIntent = new Intent(this, NotesActivity.class);
+                startActivity(notesIntent);
+                return true;
+            } else if (item.getItemId() == R.id.tracker) {
+                // Handle click on tracker item
+                // Start another activity similarly
+                Intent trackerIntent = new Intent(this, Tracker.class);
+                startActivity(trackerIntent);
+                return true;
+            } else if (item.getItemId() == R.id.settings) {
+                // Handle click on settings item
+                // Start another activity similarly
+                Intent settingsIntent = new Intent(this, DashboardActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            }
+
+            // Add conditions for other items if needed
+            return false;
+        });
+
+
+
     }
 
     private void showDateTimePicker() {

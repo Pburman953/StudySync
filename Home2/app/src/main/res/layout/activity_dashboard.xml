@@ -179,12 +179,7 @@
                 android:id="@+id/reminderHistory"
                 android:layout_height="wrap_content"/>
 
-
-
-
         </LinearLayout>
-
-
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
@@ -217,16 +212,6 @@
         android:id="@+id/plus"
         app:maxImageSize="40dp"
         app:tint ="@color/lavender"/>
-
-
-
-
-
-
-
-
-
-
 
 
 

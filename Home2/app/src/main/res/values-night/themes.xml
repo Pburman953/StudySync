@@ -4,4 +4,20 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+
+    <!-- darkmode-->
+
+    <style name="Screen">
+        <item name="colorPrimary">@color/lavender</item>
+        <item name="colorPrimaryVariant">@color/lavender</item>
+        <item name="android:background">#232323</item>
+    </style>
+
+
+    <style name="Text">
+        <item name="android:textColor">#FFFFFF</item>
+
+    </style>
+
 </resources>
