@@ -20,4 +20,12 @@
 
     </style>
 
+
+    <style name="card">
+
+        <item name="android:background">#ECE3C3</item>
+    </style>
+
+
+
 </resources>

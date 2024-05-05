@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/lavender">
+    android:background="@color/lavender"
+    >
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/framelayout"
-        android:background="@drawable/man"/>
+        />
 
 
 
@@ -20,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="1dp"
             android:orientation="vertical">
 
 
@@ -28,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0sp"
-                android:background="@drawable/backcard"
+                style="@style/card"
+
                 android:orientation="horizontal">
 
 
@@ -100,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/backcard"
+                style="@style/card"
                 android:orientation="vertical">
 
                 <TextView
