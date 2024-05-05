@@ -1,3 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="increased_text_size">32sp</dimen> <!-- Adjust the size as needed -->
+    <dimen name="default_text_size">24sp</dimen> <!-- Adjust the size as needed -->
+
 </resources>

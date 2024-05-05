@@ -4,24 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Switch;
-
-import androidx.appcompat.app.ActionBar;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.example.home.databinding.ActivityDashboardBinding;
 import com.example.home.databinding.ActivitySettingBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 
 public class SettingActivity extends AppCompatActivity {
 
     ActivitySettingBinding binding;
-    Switch switcher;
-    boolean nightmode;
 
+    Switch switcher;
+    Switch fontSizeSwitch;
+    boolean nightmode;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -31,16 +31,30 @@ public class SettingActivity extends AppCompatActivity {
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Find switcher from the binding
         switcher = binding.switcher;
 
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        fontSizeSwitch = findViewById(R.id.fontsize);
+        fontSizeSwitch.setChecked(sharedPreferences.getBoolean("fontSizeEnabled", false));
+
         nightmode = sharedPreferences.getBoolean("nightmode", false);
 
         if (nightmode) {
             switcher.setChecked(true);
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
+
+        fontSizeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                sharedPreferences.edit().putBoolean("fontSizeEnabled", isChecked).apply();
+                if (isChecked) {
+                    applyFontSize(findViewById(R.id.textView1));
+                } else {
+                    resetFontSize(findViewById(R.id.textView1));
+                }
+            }
+        });
 
         switcher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +72,10 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-
         FloatingActionButton fab = findViewById(R.id.plus);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace 'YourActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(SettingActivity.this, ReminderActivity.class);
                 startActivity(intent);
             }
@@ -71,31 +83,34 @@ public class SettingActivity extends AppCompatActivity {
 
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
-                // Handle click on home item
-                // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
-                // Do nothing if the current item is already the Notes activity
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
-                // Handle click on tracker item
-                // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
-                // Handle click on settings item
-                // Start another activity similarly
                 Intent settingsIntent = new Intent(this, DashboardActivity.class);
                 startActivity(settingsIntent);
                 return true;
             }
-
-            // Add conditions for other items if needed
             return false;
         });
     }
 
+    private void applyFontSize(TextView textView) {
+        float increasedTextSize = getResources().getDimension(R.dimen.increased_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, increasedTextSize);
+    }
+
+    private void resetFontSize(TextView textView) {
+        float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
+    }
 }
+
+
+

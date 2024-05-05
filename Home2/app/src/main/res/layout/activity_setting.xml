@@ -78,6 +78,7 @@
                     android:text=" Settings"
                     android:textSize="24sp"
                     style="@style/Text"
+                    android:id="@+id/textView1"
                     android:textStyle="bold"
                     android:textAlignment="center" />
 
@@ -132,6 +133,7 @@
             <Switch
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/fontsize"
                 android:layout_gravity="center"/>
 
 
