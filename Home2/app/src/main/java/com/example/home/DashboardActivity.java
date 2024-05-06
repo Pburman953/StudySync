@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.example.home.databinding.ActivityDashboardBinding;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,21 +77,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-
-
-
     RecyclerView recyclerView = findViewById(R.id.reminderHistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
         String remindersJson = sharedPreferences.getString(REMINDERS_KEY, "");
 
         if (!remindersJson.isEmpty()) {
-            Reminder[] reminderArray = gson.fromJson(remindersJson, Reminder[].class);
-            for (int i = 0; i < reminderArray.length; i++ ) {
-                if(!Values.RemindersList.contains(reminderArray[i])){
-                    Values.RemindersList.add(reminderArray[i]);
-                }
-            }
+            List<Reminder> reminderList = gson.fromJson(remindersJson, new TypeToken<List<Reminder>>(){}.getType());
+            Values.RemindersList.clear();
+            Values.RemindersList.addAll(reminderList);
         }
 
         int numButtons = Values.RemindersList.size();
@@ -103,7 +98,6 @@ public class DashboardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace 'YourActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(DashboardActivity.this, ReminderActivity.class);
                 startActivity(intent);
             }

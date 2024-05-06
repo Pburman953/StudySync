@@ -12,6 +12,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.home.databinding.ActivityReminderBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import com.google.gson.Gson;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,6 +50,13 @@ public class ReminderActivity extends AppCompatActivity {
     String formattedDate;
     String formattedTime;
 
+
+
+    private static final String PREFS_NAME = "ReminderPrefs";
+    private static final String REMINDERS_KEY = "reminders";
+
+    private SharedPreferences reminderPreferences;
+    private Gson gson;
     ActivityReminderBinding binding;
 
     private static final int REQUEST_NOTIFICATION = 490;
@@ -69,6 +77,10 @@ public class ReminderActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+
+
+        reminderPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        gson = new Gson();
 
         Button datePickerButton = findViewById(R.id.datePickerButton);
         datePickerButton.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +253,10 @@ public class ReminderActivity extends AppCompatActivity {
         Reminder newReminder = new Reminder(reminderID ,reminderName, description, date, time);
 
         Values.RemindersList.add(newReminder);
+        SharedPreferences.Editor editor = reminderPreferences.edit();
+        editor.putString(REMINDERS_KEY, gson.toJson(Values.RemindersList));
+        editor.apply();
+
         Toast.makeText(this, "Reminder Created!", Toast.LENGTH_SHORT).show();
         String message = "" + reminderID;
         Log.d("improntnant", message);
@@ -284,10 +300,6 @@ public class ReminderActivity extends AppCompatActivity {
                 System.currentTimeMillis() + delayInMillis,
                 notificationPending
         );
-
-
-
-
         ReminderController.addPendingIntent(newReminder.getreminderID(), notificationPending);
 
         startActivity(new Intent(ReminderActivity.this, DashboardActivity.class));
