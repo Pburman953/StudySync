@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +19,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.home.databinding.ActivityDashboardBinding;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -33,11 +37,18 @@ public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
+    TextView date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        date = findViewById(R.id.textView);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDate = sdf.format(new Date());
+        date.append(currentDate);
 
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
