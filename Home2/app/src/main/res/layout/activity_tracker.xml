@@ -111,7 +111,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="MON MAY 1ST"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
@@ -130,6 +129,7 @@
                     android:layout_height="186dp">
 
                 </ListView>
+
             </LinearLayout>
 
 

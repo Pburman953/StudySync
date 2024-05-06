@@ -17,10 +17,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import android.Manifest;
 import android.widget.Toast;
 
@@ -47,6 +51,7 @@ public class Tracker extends AppCompatActivity {
 
     ListView listView;
 
+    TextView date;
     PieChart chart;
 
     @Override
@@ -57,6 +62,11 @@ public class Tracker extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         chart = findViewById(R.id.chart);
+        date = findViewById(R.id.textView);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDate = sdf.format(new Date());
+        date.append(currentDate);
 
         // Check if the user has granted the PACKAGE_USAGE_STATS permission
         if (!hasPackageUsageStatsPermission()) {
