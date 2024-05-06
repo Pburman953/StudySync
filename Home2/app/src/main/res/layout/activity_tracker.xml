@@ -116,12 +116,12 @@
                     android:textColor="@color/white"
                     android:textSize="35sp" />
 
-                <com.github.mikephil.charting.charts.BarChart
+                <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/chart"
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
 
-                </com.github.mikephil.charting.charts.BarChart>
+                </com.github.mikephil.charting.charts.PieChart>
 
 
                 <ListView

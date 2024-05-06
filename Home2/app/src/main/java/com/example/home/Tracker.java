@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import android.Manifest;
@@ -25,11 +26,15 @@ import android.widget.Toast;
 
 import com.example.home.databinding.ActivityTrackerBinding;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +46,8 @@ public class Tracker extends AppCompatActivity {
     ActivityTrackerBinding binding;
 
     ListView listView;
-    BarChart chart;
+
+    PieChart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +138,12 @@ public class Tracker extends AppCompatActivity {
 
     // Display the app usage stats in the ListView
     private void displayAppUsageStats() {
-        // Query and retrieve the app usage stats
         UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
         List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0, System.currentTimeMillis());
 
-// Create a BarDataSet with the package name as X axis and total time in foreground as Y axis
-        List<BarEntry> entries = new ArrayList<>();
-        List<String> labels = new ArrayList<>(); // Add a list to store the labels
+        List<PieEntry> entries = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
 
         for (int i = 0; i < stats.size(); i++) {
             UsageStats usageStats = stats.get(i);
@@ -146,28 +151,26 @@ public class Tracker extends AppCompatActivity {
             float totalTimeInForeground = usageStats.getTotalTimeInForeground();
             totalTimeInForeground = totalTimeInForeground / 60000;
             if (totalTimeInForeground > 1) {
-                entries.add(new BarEntry(i, totalTimeInForeground)); // Remove the packageName parameter from the constructor
-                labels.add(packageName); // Add the packageName to the labels list
+                entries.add(new PieEntry(i, totalTimeInForeground));
+                labels.add(packageName);
+                list1.add(packageName + " : " + Math.round(totalTimeInForeground) + " Minutes");
             }
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list1);
+        listView.setAdapter(adapter);
+        chart.getDescription().setEnabled(false); // Disable description
+        chart.setUsePercentValues(true); // Show percentage values
+        chart.setEntryLabelColor(Color.BLACK); // Set label color
 
-        BarDataSet dataSet = new BarDataSet(entries, "App Usage Stats");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        dataSet.setValueTextColor(Color.BLACK);
-        dataSet.setValueTextSize(12f);
+// Create a PieDataSet
+        PieDataSet dataSet = new PieDataSet(entries, labels.toString());
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS); // Set colors for the chart
 
-        BarData barData = new BarData(dataSet);
-        chart.setData(barData);
+// Create PieData and set it to the chart
+        PieData data = new PieData(dataSet);
+        chart.setData(data);
+        chart.invalidate(); // Re
 
-        Description description = new Description();
-        description.setText("App Usage Stats");
-        chart.setDescription(description);
-
-        XAxis xAxis = chart.getXAxis(); // Get the x-axis
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels)); // Set the labels for the x-axis
-        xAxis.setGranularity(1f); // Ensure labels are not skipped
-        xAxis.setCenterAxisLabels(true); // Center the labels on the bars
-        xAxis.setLabelCount(labels.size()); // Set the number of labels to display
 
 
     }
