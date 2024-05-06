@@ -12,15 +12,18 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -29,7 +32,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-
 
 import com.example.home.databinding.ActivityReminderBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,16 +51,48 @@ public class ReminderActivity extends AppCompatActivity {
     String formattedDate;
     String formattedTime;
 
+
+
+    private boolean fontSizeEnabled;
+
     ActivityReminderBinding binding;
 
     private static final int REQUEST_NOTIFICATION = 490;
     private static final long DELAY_IN_MILLIS = 10000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityReminderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        fontSizeEnabled = sharedPreferences.getBoolean("fontSizeEnabled", false);
+
+        // Apply font size change when needed
+        if (fontSizeEnabled) {
+            applyFontSize(findViewById(R.id.title));
+            applyFontSize(findViewById(R.id.textView2));
+            applyFontSize(findViewById(R.id.editTextReminderName));
+            applyFontSize(findViewById(R.id.editTextDescription));
+
+
+        }
+        else {
+            resetFontSize(findViewById(R.id.title));
+            resetFontSize(findViewById(R.id.textView2));
+            resetFontSize(findViewById(R.id.editTextReminderName));
+            resetFontSize(findViewById(R.id.editTextDescription));
+
+
+
+
+
+        }
+
         Context context = this;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
@@ -68,6 +102,9 @@ public class ReminderActivity extends AppCompatActivity {
             );
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+
+
+
         }
 
         Button datePickerButton = findViewById(R.id.datePickerButton);
@@ -324,4 +361,17 @@ public class ReminderActivity extends AppCompatActivity {
     public Context getActivityContext() {
         return this;
     }
+
+
+    private void applyFontSize(TextView textView) {
+        // Apply larger text size
+        float increasedTextSize = getResources().getDimension(R.dimen.increased_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, increasedTextSize);
+    }
+
+    private void resetFontSize(TextView textView) {
+        float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
+    }
+
 }

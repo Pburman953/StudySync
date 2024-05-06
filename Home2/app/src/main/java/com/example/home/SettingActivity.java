@@ -50,8 +50,13 @@ public class SettingActivity extends AppCompatActivity {
                 sharedPreferences.edit().putBoolean("fontSizeEnabled", isChecked).apply();
                 if (isChecked) {
                     applyFontSize(findViewById(R.id.textView1));
+                    applyFontSize(findViewById(R.id.textView2));
+
                 } else {
                     resetFontSize(findViewById(R.id.textView1));
+                    resetFontSize(findViewById(R.id.textView2));
+
+
                 }
             }
         });

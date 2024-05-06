@@ -2,8 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name = "orange">#ECE3C3</color>
+    <color name = "orange">#c50000</color>
     <color name="blue">  #89CFF0</color>
     <color name="lavender">  #8682f7</color>
+    <color name="purple">#a7a9d7</color>
+
+
+    <color name="light_button_color">#FFFFFF</color>
+
+    
+    <color name="darkblue">#191E29</color>
+    <color name="navy">#0B0E14</color>
+    <color name="lightgray">#E1E8F5</color>
+    <color name="gray">#6f6f6f</color>
+    <color name="darkgrey">#262626</color>
 
 </resources>

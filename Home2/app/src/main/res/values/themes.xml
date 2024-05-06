@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Home" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/lavender</item>
+        <item name="colorPrimary">@color/purple</item>
         <item name="cardBackgroundColor">@style/card</item>
         <item name="colorPrimaryVariant">@color/lavender</item>
     </style>
@@ -10,8 +10,16 @@
     <style name="Screen">
         <item name="colorPrimary">@color/lavender</item>
         <item name="colorPrimaryVariant">@color/lavender</item>
-        <item name="android:background">#FFF</item>
+        <item name="android:background">#8682f7</item>
     </style>
+
+
+    <!-- res/values/styles.xml -->
+    <style name="LightButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/light_button_color</item>
+        <!-- Add other button attributes for light theme -->
+    </style>
+
 
 
     <style name="Text">

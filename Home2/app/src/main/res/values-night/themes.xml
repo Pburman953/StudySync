@@ -1,8 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Home" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/gray</item>
+        <item name="cardBackgroundColor">@style/card</item>
+        <item name="colorPrimaryVariant">@color/lavender</item>
     </style>
 
 
@@ -16,7 +17,7 @@
 
 
     <style name="Text">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#ffff</item>
 
     </style>
 

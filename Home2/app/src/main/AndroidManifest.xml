@@ -51,6 +51,13 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Home" />
+
+
+        <activity
+            android:name=".Activtiy_start"
+            android:exported="true"
+            android:label="Home"
+            android:theme="@style/Theme.Home" />
         <activity
             android:name=".NotesActivity"
             android:exported="true"

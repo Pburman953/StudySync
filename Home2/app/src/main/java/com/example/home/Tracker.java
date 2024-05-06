@@ -8,10 +8,12 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -43,6 +45,9 @@ public class Tracker extends AppCompatActivity {
     ListView listView;
     BarChart chart;
 
+    private boolean fontSizeEnabled;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,26 @@ public class Tracker extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         chart = findViewById(R.id.chart);
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        fontSizeEnabled = sharedPreferences.getBoolean("fontSizeEnabled", false);
+
+        // Apply font size change when needed
+        if (fontSizeEnabled) {
+            applyFontSize(findViewById(R.id.title));
+            applyFontSize(findViewById(R.id.textView));
+
+
+        }
+        else {
+            resetFontSize(findViewById(R.id.textView));
+            resetFontSize(findViewById(R.id.title));
+
+
+
+        }
+
 
         // Check if the user has granted the PACKAGE_USAGE_STATS permission
         if (!hasPackageUsageStatsPermission()) {
@@ -170,6 +195,17 @@ public class Tracker extends AppCompatActivity {
         xAxis.setLabelCount(labels.size()); // Set the number of labels to display
 
 
+    }
+
+    private void applyFontSize(TextView textView) {
+        // Apply larger text size
+        float increasedTextSize = getResources().getDimension(R.dimen.increased_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, increasedTextSize);
+    }
+
+    private void resetFontSize(TextView textView) {
+        float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
     }
 
 }

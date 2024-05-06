@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/lavender"
+
     >
 
 
@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/framelayout"
+        style="@style/Screen"
         />
 
 
@@ -29,8 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0sp"
-                style="@style/card"
-
+                android:background="@drawable/backcard"
                 android:orientation="horizontal">
 
 
@@ -82,6 +82,7 @@
                         android:layout_centerInParent="true"
                         android:text=" Welcome Back John Smith"
                         android:textSize="24sp"
+                        android:id="@+id/textview7"
                         android:textStyle="bold"
                         android:textAlignment="center" />
 
@@ -102,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/backcard"
-                style="@style/card"
+
                 android:orientation="vertical">
 
                 <TextView
@@ -160,6 +161,7 @@
                     android:layout_weight="1"
                     android:text="Today"
                     android:textColor="#DCA900"
+
                     android:textSize="20sp"
                     android:layout_marginTop="1dp"/>
 

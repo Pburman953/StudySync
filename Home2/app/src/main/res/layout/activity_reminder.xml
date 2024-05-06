@@ -138,6 +138,7 @@
                     android:id="@+id/datePickerButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/LightButton"
                     android:text="Select Date and Time" />
 
 
@@ -145,12 +146,14 @@
                     android:id="@+id/buttonMakeReservation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/LightButton"
                     android:text="Make Reminder" />
 
                 <Button
                     android:id="@+id/BackReminder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/LightButton"
                     android:layout_gravity="center"
                     android:text="Back" />
 
