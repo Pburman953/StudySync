@@ -3,6 +3,7 @@ package com.example.home;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.home.ReminderActivity;
@@ -15,6 +16,9 @@ import java.util.Map;
 public class ReminderController {
 
     public static Map<Integer, PendingIntent> pendingIntentMap = new HashMap<>();
+
+
+
 
     public static void addPendingIntent(int requestCode, PendingIntent pendingIntent) {
         Log.d("verypiwngeoinrgoen", ""+requestCode);
@@ -62,5 +66,7 @@ public class ReminderController {
         }
         System.out.println("No reminder found with name '" + reminderID + "'.");
     }
+
+
 
 }
