@@ -50,8 +50,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         if (!remindersJson.isEmpty()) {
             Reminder[] reminderArray = gson.fromJson(remindersJson, Reminder[].class);
-            for (Reminder reminder : reminderArray) {
-                Values.RemindersList.add(reminder);
+            for (int i = 0; i < reminderArray.length; i++ ) {
+                if(!Values.RemindersList.contains(reminderArray[i]))
+                Values.RemindersList.add(reminderArray[i]);
             }
         }
 
