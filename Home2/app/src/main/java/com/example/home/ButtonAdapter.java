@@ -41,6 +41,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
             button = itemView.findViewById(R.id.button);
         }
 
+
+
         public void bind(int position) {
             String name = Values.RemindersList.get(position).getReminderName();
             button.setText(name);
