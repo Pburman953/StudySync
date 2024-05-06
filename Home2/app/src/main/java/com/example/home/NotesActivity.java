@@ -26,6 +26,8 @@ public class NotesActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private SharedPreferences sharedPreferences;
 
+    Button Submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,19 @@ public class NotesActivity extends AppCompatActivity {
         String savedText = sharedPreferences.getString("savedText", "");
         String[] notesArray = savedText.split("\n");
         adapter.addAll(new ArrayList<>(Arrays.asList(notesArray)));
+
+        Submit = findViewById(R.id.submitNote);
+        Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String note = inputText.getText().toString().trim();
+                if (!note.isEmpty()) {
+                    adapter.add(note);
+                    inputText.setText("");
+                    saveNotesToSharedPreferences();
+                }
+            }
+        });
 
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
