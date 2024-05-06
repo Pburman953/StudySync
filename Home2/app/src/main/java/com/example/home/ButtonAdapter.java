@@ -1,4 +1,7 @@
 package com.example.home;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +44,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
             button = itemView.findViewById(R.id.button);
         }
 
+
+
         public void bind(int position) {
             String name = Values.RemindersList.get(position).getReminderName();
             button.setText(name);
@@ -48,7 +53,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
                 @Override
                 public void onClick(View v) {
                     // Handle button click
-                    Toast.makeText(v.getContext(), "Button " + (position + 1) + " clicked", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), ManageReminderActivity.class);
+                    v.getContext().startActivity(intent);
                 }
             });
         }

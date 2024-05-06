@@ -19,6 +19,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import com.example.home.databinding.ActivityDashboardBinding;
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -27,12 +34,28 @@ public class DashboardActivity extends AppCompatActivity {
 
     ActivityDashboardBinding binding;
 
+    private static final String PREFS_NAME = "ReminderPrefs";
+    private static final String REMINDERS_KEY = "reminders";
+
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
+
+    TextView date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        date = findViewById(R.id.textView);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String currentDate = sdf.format(new Date());
+        date.append(currentDate);
+
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        gson = new Gson();
 
         SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         fontSizeEnabled = sharedPreferences.getBoolean("fontSizeEnabled", false);
@@ -59,8 +82,16 @@ public class DashboardActivity extends AppCompatActivity {
     RecyclerView recyclerView = findViewById(R.id.reminderHistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
+        String remindersJson = sharedPreferences.getString(REMINDERS_KEY, "");
 
-
+        if (!remindersJson.isEmpty()) {
+            Reminder[] reminderArray = gson.fromJson(remindersJson, Reminder[].class);
+            for (int i = 0; i < reminderArray.length; i++ ) {
+                if(!Values.RemindersList.contains(reminderArray[i])){
+                    Values.RemindersList.add(reminderArray[i]);
+                }
+            }
+        }
 
         int numButtons = Values.RemindersList.size();
         if(Values.RemindersList.size() > 0) {
