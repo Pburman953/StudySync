@@ -144,6 +144,7 @@ public class Tracker extends AppCompatActivity {
         List<PieEntry> entries = new ArrayList<>();
         List<String> labels = new ArrayList<>();
         List<String> list1 = new ArrayList<>();
+        Integer totaltime = 0;
 
         for (int i = 0; i < stats.size(); i++) {
             UsageStats usageStats = stats.get(i);
@@ -154,8 +155,10 @@ public class Tracker extends AppCompatActivity {
                 entries.add(new PieEntry(i, totalTimeInForeground));
                 labels.add(packageName);
                 list1.add(packageName + " : " + Math.round(totalTimeInForeground) + " Minutes");
+                totaltime = (int) (totaltime + totalTimeInForeground);
             }
         }
+        list1.add("Total Screen Time = " + totaltime.toString());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list1);
         listView.setAdapter(adapter);
         chart.getDescription().setEnabled(false); // Disable description
