@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -71,6 +70,7 @@ public class ManageReminderActivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(android.view.MenuItem menuItem) {
                                 if (menuItem.getItemId() == R.id.deleteReminder) {
+                                    ReminderController.cancelPendingIntent(getApplicationContext() ,reminder.getreminderID());
                                     ReminderController.deleteReminder(reminder.getreminderID());
                                     Toast.makeText(ManageReminderActivity.this, "Reminder Deleted!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(ManageReminderActivity.this, DashboardActivity.class));

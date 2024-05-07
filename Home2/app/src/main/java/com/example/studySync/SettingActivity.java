@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.example.home.databinding.ActivitySettingBinding;
+import com.example.studySync.databinding.ActivitySettingBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SettingActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.app.Activity;
 

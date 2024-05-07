@@ -1,6 +1,4 @@
-package com.example.home;
-
-import static android.content.Context.ALARM_SERVICE;
+package com.example.studySync;
 
 import android.Manifest;
 import android.app.AlarmManager;
@@ -12,6 +10,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -25,24 +24,17 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 
-import com.example.home.databinding.ActivityReminderBinding;
+import com.example.studySync.databinding.ActivityReminderBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ReminderActivity extends AppCompatActivity {
 
@@ -50,6 +42,13 @@ public class ReminderActivity extends AppCompatActivity {
     String formattedDate;
     String formattedTime;
 
+
+
+    private static final String PREFS_NAME = "ReminderPrefs";
+    private static final String REMINDERS_KEY = "reminders";
+
+    private SharedPreferences reminderPreferences;
+    private Gson gson;
     ActivityReminderBinding binding;
 
     private static final int REQUEST_NOTIFICATION = 490;
@@ -70,6 +69,10 @@ public class ReminderActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+
+
+        reminderPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        gson = new Gson();
 
         Button datePickerButton = findViewById(R.id.datePickerButton);
         datePickerButton.setOnClickListener(new View.OnClickListener() {
@@ -197,11 +200,32 @@ public class ReminderActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    public static boolean isDateTimeAfterNow(String formattedDate, String formattedTime) {
+        // Get the current date and time
+        Calendar currentDateTime = Calendar.getInstance();
+
+        // Convert the formattedDate and formattedTime to Calendar objects
+        Calendar selectedDateTime = Calendar.getInstance();
+        selectedDateTime.set(
+                Integer.parseInt(formattedDate.substring(0, 4)), // year
+                Integer.parseInt(formattedDate.substring(5, 7)) - 1, // month (subtract 1 as Calendar months are zero-based)
+                Integer.parseInt(formattedDate.substring(8)), // day
+                Integer.parseInt(formattedTime.substring(0, 2)), // hour
+                Integer.parseInt(formattedTime.substring(3)) // minute
+        );
+
+        // Compare the selected date and time with the current date and time
+        return selectedDateTime.after(currentDateTime);
+    }
+
+
     private boolean hasNotificationPermission() {
         boolean mode = ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_GRANTED;
         return mode;
     }
+
+
 
     private void requestNotificationPermission() {
         // Launch notification settings activity for the app
@@ -234,18 +258,35 @@ public class ReminderActivity extends AppCompatActivity {
         EditText descriptionEditText = findViewById(R.id.editTextDescription);
 
 
-        if (!areInputsValid(reminderNameEditText, descriptionEditText)) {
-            return; // Stop further execution if inputs are invalid
-        }
+
         int reminderID = (int) System.currentTimeMillis() + new Random().nextInt(1000) ;
         String reminderName = reminderNameEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         String date = formattedDate;
         String time = formattedTime;
 
+        if (!areInputsValid(reminderNameEditText, descriptionEditText)) {
+            return; // Stop further execution if inputs are invalid
+        }
+
+        if(formattedDate != null && formattedTime != null){
+            if(!isDateTimeAfterNow(formattedDate, formattedTime)){
+                Toast.makeText(this, "Enter a Date and Time after the current Time", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else{
+            Toast.makeText(this, "Enter a Date and Time", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Reminder newReminder = new Reminder(reminderID ,reminderName, description, date, time);
 
         Values.RemindersList.add(newReminder);
+        SharedPreferences.Editor editor = reminderPreferences.edit();
+        editor.putString(REMINDERS_KEY, gson.toJson(Values.RemindersList));
+        editor.apply();
+
         Toast.makeText(this, "Reminder Created!", Toast.LENGTH_SHORT).show();
         String message = "" + reminderID;
         Log.d("improntnant", message);
@@ -289,10 +330,6 @@ public class ReminderActivity extends AppCompatActivity {
                 System.currentTimeMillis() + delayInMillis,
                 notificationPending
         );
-
-
-
-
         ReminderController.addPendingIntent(newReminder.getreminderID(), notificationPending);
 
         startActivity(new Intent(ReminderActivity.this, DashboardActivity.class));
@@ -310,7 +347,9 @@ public class ReminderActivity extends AppCompatActivity {
                 return false;
             }
         }
+
         playSuccessSound();
+
         return true;
     }
 

@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import org.junit.Test;
 

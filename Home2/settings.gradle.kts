@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Home"
+rootProject.name = "Study Sync"
 include(":app")

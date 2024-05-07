@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,11 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-import com.example.home.databinding.ActivityDashboardBinding;
+import com.example.studySync.databinding.ActivityDashboardBinding;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -76,21 +72,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
-
-
-
     RecyclerView recyclerView = findViewById(R.id.reminderHistory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
         String remindersJson = sharedPreferences.getString(REMINDERS_KEY, "");
 
         if (!remindersJson.isEmpty()) {
-            Reminder[] reminderArray = gson.fromJson(remindersJson, Reminder[].class);
-            for (int i = 0; i < reminderArray.length; i++ ) {
-                if(!Values.RemindersList.contains(reminderArray[i])){
-                    Values.RemindersList.add(reminderArray[i]);
-                }
-            }
+            List<Reminder> reminderList = gson.fromJson(remindersJson, new TypeToken<List<Reminder>>(){}.getType());
+            Values.RemindersList.clear();
+            Values.RemindersList.addAll(reminderList);
         }
 
         int numButtons = Values.RemindersList.size();
@@ -103,7 +93,6 @@ public class DashboardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace 'YourActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(DashboardActivity.this, ReminderActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);

@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.home"
+    namespace = "com.example.studySync"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.home"
+        applicationId = "com.example.studySync"
         minSdk = 33
         targetSdk = 33
         versionCode = 1
