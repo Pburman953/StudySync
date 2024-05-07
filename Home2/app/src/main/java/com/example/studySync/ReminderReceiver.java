@@ -37,8 +37,8 @@ public class ReminderReceiver extends BroadcastReceiver {
         // Create a notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle(title)
-                .setContentText(description)
+                .setContentTitle("Study Sync")
+                .setContentText(title)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         // Show the notification
