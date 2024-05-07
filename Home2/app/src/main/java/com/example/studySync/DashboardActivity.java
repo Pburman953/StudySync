@@ -3,6 +3,7 @@ package com.example.studySync;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -107,6 +108,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DashboardActivity.this, ReminderActivity.class);
                 startActivity(intent);
+                playmenuSuccessSound();
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
             }
         });
@@ -116,6 +118,7 @@ public class DashboardActivity extends AppCompatActivity {
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 startActivity(homeIntent);
+                playmenuSuccessSound();
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
@@ -123,6 +126,7 @@ public class DashboardActivity extends AppCompatActivity {
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 startActivity(notesIntent);
+                playmenuSuccessSound();
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -130,6 +134,7 @@ public class DashboardActivity extends AppCompatActivity {
                 // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
@@ -138,6 +143,7 @@ public class DashboardActivity extends AppCompatActivity {
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(settingsIntent);
+                playmenuSuccessSound();
                 return true;
             }
 
@@ -172,7 +178,10 @@ public class DashboardActivity extends AppCompatActivity {
         float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
     }
-
+    private void playmenuSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
+        mediaPlayer.start();
+    }
 
 
 }

@@ -3,6 +3,7 @@ package com.example.studySync;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -83,6 +84,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, ReminderActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(intent);
             }
         });
@@ -91,21 +93,25 @@ public class SettingActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 Intent settingsIntent = new Intent(this, DashboardActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(settingsIntent);
                 return true;
             }
@@ -128,6 +134,11 @@ public class SettingActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
 
+    }
+
+    private void playmenuSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
+        mediaPlayer.start();
     }
 
 }

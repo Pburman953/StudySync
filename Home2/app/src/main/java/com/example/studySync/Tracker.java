@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.TypedValue;
@@ -99,6 +100,7 @@ public class Tracker extends AppCompatActivity {
             public void onClick(View view) {
                 // Replace 'TrackerActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(Tracker.this, ReminderActivity.class);
+                playmenuSuccessSound();
                 startActivity(intent);
             }
         });
@@ -109,6 +111,7 @@ public class Tracker extends AppCompatActivity {
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
@@ -116,6 +119,7 @@ public class Tracker extends AppCompatActivity {
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -126,6 +130,7 @@ public class Tracker extends AppCompatActivity {
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
+                playmenuSuccessSound();
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             }
@@ -223,6 +228,11 @@ public class Tracker extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
 
+    }
+
+    private void playmenuSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
+        mediaPlayer.start();
     }
 
 }

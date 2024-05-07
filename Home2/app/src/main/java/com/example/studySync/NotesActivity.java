@@ -2,6 +2,7 @@ package com.example.studySync;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,6 +56,7 @@ public class NotesActivity extends AppCompatActivity {
                 if (!note.isEmpty()) {
                     adapter.add(note);
                     inputText.setText("");
+                    playSuccessSound();
                     saveNotesToSharedPreferences();
                 }
             }
@@ -79,6 +81,7 @@ public class NotesActivity extends AppCompatActivity {
                 Intent intent = new Intent(NotesActivity.this, ReminderActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
             }
         });
 
@@ -88,6 +91,7 @@ public class NotesActivity extends AppCompatActivity {
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
@@ -96,6 +100,7 @@ public class NotesActivity extends AppCompatActivity {
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 startActivity(trackerIntent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
@@ -103,6 +108,7 @@ public class NotesActivity extends AppCompatActivity {
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 return true;
             }
 
@@ -127,6 +133,16 @@ public class NotesActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
 
+    }
+
+    private void playSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.page);
+        mediaPlayer.start();
+    }
+
+    private void playmenuSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
+        mediaPlayer.start();
     }
 
 }

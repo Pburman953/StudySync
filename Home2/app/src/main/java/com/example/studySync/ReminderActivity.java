@@ -107,8 +107,9 @@ public class ReminderActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace 'YourActivity' with the name of your activity or fragment class
+
                 Intent intent = new Intent(ReminderActivity.this, ReminderActivity.class);
+                playmenuSuccessSound();
                 startActivity(intent);
             }
         });
@@ -117,12 +118,14 @@ public class ReminderActivity extends AppCompatActivity {
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 startActivity(homeIntent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 return true;
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -130,6 +133,7 @@ public class ReminderActivity extends AppCompatActivity {
                 // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
@@ -137,6 +141,7 @@ public class ReminderActivity extends AppCompatActivity {
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                playmenuSuccessSound();
                 startActivity(settingsIntent);
                 return true;
             }
@@ -375,6 +380,11 @@ public class ReminderActivity extends AppCompatActivity {
 
     private void playSuccessSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.remindersound);
+        mediaPlayer.start();
+    }
+
+    private void playmenuSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
         mediaPlayer.start();
     }
 
