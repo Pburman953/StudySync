@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.home.databinding.ActivityMainBinding;
+import com.example.studySync.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;

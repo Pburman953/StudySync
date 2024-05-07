@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.home.databinding.ActivityNotesBinding;
+import com.example.studySync.databinding.ActivityNotesBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

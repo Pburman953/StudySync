@@ -1,16 +1,12 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.home.ReminderActivity;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class ReminderController {

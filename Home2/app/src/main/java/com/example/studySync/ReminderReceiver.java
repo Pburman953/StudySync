@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -36,7 +36,7 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         // Create a notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.logo)
                 .setContentTitle(title)
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

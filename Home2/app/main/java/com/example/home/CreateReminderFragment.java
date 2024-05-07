@@ -1,4 +1,4 @@
-package com.example.home;
+package com.example.studySync;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.home.databinding.FragmentCreatereminderBinding;
+import com.example.studySync.databinding.FragmentCreatereminderBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
