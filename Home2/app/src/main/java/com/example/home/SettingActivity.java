@@ -82,6 +82,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingActivity.this, ReminderActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(intent);
             }
         });
@@ -89,16 +90,22 @@ public class SettingActivity extends AppCompatActivity {
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
+                Intent notesIntent = new Intent(this, NotesActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
+                startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
                 Intent trackerIntent = new Intent(this, Tracker.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 Intent settingsIntent = new Intent(this, DashboardActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(settingsIntent);
                 return true;
             }
@@ -115,6 +122,14 @@ public class SettingActivity extends AppCompatActivity {
         float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
+
+    }
+
 }
 
 

@@ -77,6 +77,7 @@ public class NotesActivity extends AppCompatActivity {
                 // Replace 'NotesActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(NotesActivity.this, ReminderActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
             }
         });
 
@@ -85,22 +86,22 @@ public class NotesActivity extends AppCompatActivity {
                 // Handle click on home item
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
-                // Do nothing if the current item is already the Notes activity
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
-                // Handle click on tracker item
-                // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
                 startActivity(trackerIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             }
 
@@ -119,4 +120,12 @@ public class NotesActivity extends AppCompatActivity {
         editor.putString("savedText", updatedText.toString().trim());
         editor.apply();
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
+
+    }
+
 }

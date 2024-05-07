@@ -106,6 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
                 // Replace 'YourActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(DashboardActivity.this, ReminderActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
             }
         });
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
@@ -114,23 +115,27 @@ public class DashboardActivity extends AppCompatActivity {
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 startActivity(homeIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
                 startActivity(notesIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
                 // Handle click on tracker item
                 // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(settingsIntent);
                 return true;
             }

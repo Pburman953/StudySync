@@ -13,6 +13,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -112,23 +113,27 @@ public class ReminderActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 startActivity(homeIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
                 // Handle click on tracker item
                 // Start another activity similarly
                 Intent trackerIntent = new Intent(this, Tracker.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(trackerIntent);
                 return true;
             } else if (item.getItemId() == R.id.settings) {
                 // Handle click on settings item
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(settingsIntent);
                 return true;
             }
@@ -305,6 +310,7 @@ public class ReminderActivity extends AppCompatActivity {
                 return false;
             }
         }
+        playSuccessSound();
         return true;
     }
 
@@ -319,6 +325,18 @@ public class ReminderActivity extends AppCompatActivity {
         } else {
             return "this field";
         }
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
+
+    }
+
+    private void playSuccessSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.remindersound);
+        mediaPlayer.start();
     }
 
     public Context getActivityContext() {

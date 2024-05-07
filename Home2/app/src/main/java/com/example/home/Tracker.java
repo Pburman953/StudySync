@@ -118,12 +118,14 @@ public class Tracker extends AppCompatActivity {
                 // Handle click on home item
                 // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(homeIntent);
                 return true;
             } else if (item.getItemId() == R.id.notes) {
                 // Handle click on notes item
                 // Start another activity similarly
                 Intent notesIntent = new Intent(this, NotesActivity.class);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 startActivity(notesIntent);
                 return true;
             } else if (item.getItemId() == R.id.tracker) {
@@ -134,6 +136,7 @@ public class Tracker extends AppCompatActivity {
                 // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
+                overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 return true;
             }
 
@@ -222,6 +225,13 @@ public class Tracker extends AppCompatActivity {
     private void resetFontSize(TextView textView) {
         float defaultTextSize = getResources().getDimension(R.dimen.default_text_size);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, defaultTextSize);
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
+
     }
 
 }
