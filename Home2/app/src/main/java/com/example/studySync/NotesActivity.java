@@ -36,6 +36,7 @@ public class NotesActivity extends AppCompatActivity {
 
         inputText = findViewById(R.id.editText);
         noteListView = findViewById(R.id.noteListView);
+        noteListView.setNestedScrollingEnabled(true);
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 

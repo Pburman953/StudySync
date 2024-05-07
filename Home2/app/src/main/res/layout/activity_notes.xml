@@ -4,38 +4,25 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lavender">
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/framelayout"/>
-
-
-
     <androidx.core.widget.NestedScrollView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/man"
-        >
-
-
+        android:background="@drawable/man">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:orientation="vertical">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0sp"
                 android:background="@drawable/backcard"
                 android:orientation="horizontal">
-
-
                 <LinearLayout
                     android:id="@+id/View"
                     android:layout_width="83dp"
@@ -43,9 +30,7 @@
                     android:layout_marginStart="10dp"
                     android:translationY="0dp"
                     app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    >
-
+                    app:layout_constraintStart_toStartOf="parent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -65,19 +50,13 @@
                             android:text="John Smith"
                             android:textSize="15dp" />
                     </LinearLayout>
-
-
-
-
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
                     android:layout_weight="0.333"
                     android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
@@ -87,20 +66,8 @@
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:padding="16dp" />
-
-
-
                 </LinearLayout>
-
-
-
-
-
-
-
             </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,8 +79,8 @@
                     android:id="@+id/submitNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tap to Submit Note"
                     android:layout_marginTop="8dp"
+                    android:text="Tap to Submit Note"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/editText" />
@@ -133,28 +100,16 @@
 
                 <ListView
                     android:id="@+id/noteListView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="176dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="369dp"
+                    android:minHeight="400dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/submitNote" />
-
-
-
-
-
             </LinearLayout>
-
-
-
-
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,7 +117,6 @@
         android:layout_gravity="bottom"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp">
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,12 +125,8 @@
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_menu">
-
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
     </com.google.android.material.bottomappbar.BottomAppBar>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -186,18 +136,4 @@
         android:id="@+id/plus"
         app:maxImageSize="40dp"
         app:tint ="@color/lavender"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
