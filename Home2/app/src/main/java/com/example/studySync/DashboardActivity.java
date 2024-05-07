@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +37,8 @@ public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
+    private TextView screenTime;
+
     TextView date;
 
     @Override
@@ -43,11 +46,20 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        screenTime = findViewById(R.id.textView4);
         date = findViewById(R.id.textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String currentDate = sdf.format(new Date());
         date.append(currentDate);
+
+
+
+        if(Values.totalScreenTime != null ){
+            screenTime.setText(Values.totalScreenTime + " minutes");
+        }
+        else{
+            Toast.makeText(this, "Allow data usage permissions in tracker", Toast.LENGTH_SHORT).show();
+        }
 
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);

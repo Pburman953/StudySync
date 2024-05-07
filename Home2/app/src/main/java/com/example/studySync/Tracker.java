@@ -37,6 +37,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class Tracker extends AppCompatActivity {
     private static final int REQUEST_PACKAGE_USAGE_STATS = 1;
 
+
     ActivityTrackerBinding binding;
 
     ListView listView;
@@ -61,6 +62,7 @@ public class Tracker extends AppCompatActivity {
         String currentDate = sdf.format(new Date());
         date.append(currentDate);
 
+        listView.setNestedScrollingEnabled(true);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         fontSizeEnabled = sharedPreferences.getBoolean("fontSizeEnabled", false);
@@ -201,6 +203,7 @@ public class Tracker extends AppCompatActivity {
         chart.invalidate(); // Re
 
 
+        Values.totalScreenTime = totaltime.toString();
 
     }
 
