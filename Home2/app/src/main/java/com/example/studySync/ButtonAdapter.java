@@ -37,16 +37,22 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     public class ButtonViewHolder extends RecyclerView.ViewHolder {
         Button button;
 
+        Button button2;
+
         public ButtonViewHolder(@NonNull View itemView) {
             super(itemView);
             button = itemView.findViewById(R.id.button);
+            button2 = itemView.findViewById(R.id.button2);
         }
 
 
 
         public void bind(int position) {
             String name = Values.RemindersList.get(position).getReminderName();
+            String date = Values.RemindersList.get(position).getDate();
             button.setText(name);
+            button2.setText( date);
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

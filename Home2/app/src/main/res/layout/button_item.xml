@@ -1,8 +1,57 @@
-<Button
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/button"
-    android:layout_width="wrap_content"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="90dp"
     android:layout_height="wrap_content"
-    android:text="Button"
-    android:background="@drawable/button_background"
-    android:layout_margin="8dp"/>
+    android:layout_margin="8dp"
+    android:background="@drawable/backcard"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp">
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/framelayout"
+        style="@style/Screen"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backcard"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reminder"
+            style="@style/Text"
+            android:textAlignment="center" />
+
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            style="@style/Text"
+            android:background="@drawable/button_background"
+            android:text="Button" />
+
+
+        <Button xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            style="@style/Text"
+            android:background="@drawable/button_background"
+            android:text="Button" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

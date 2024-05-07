@@ -3,12 +3,17 @@ package com.example.studySync;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +25,7 @@ import com.example.studySync.databinding.ActivityDashboardBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +35,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private boolean fontSizeEnabled;
+
+    private static final int PICK_IMAGE_REQUEST = 2; // Or any unique integer constant
+
 
     ActivityDashboardBinding binding;
 
@@ -155,6 +164,26 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                ImageView profileImageView = findViewById(R.id.profile);
+                profileImageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
+
+    @Override
     protected void onResume() {
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.reminderHistory);
@@ -181,6 +210,12 @@ public class DashboardActivity extends AppCompatActivity {
     private void playmenuSuccessSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
         mediaPlayer.start();
+    }
+
+    public void onImageClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+
     }
 
 

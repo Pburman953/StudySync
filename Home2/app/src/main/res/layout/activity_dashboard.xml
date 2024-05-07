@@ -54,6 +54,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
+                            android:onClick="onImageClick"
+                            android:id="@+id/profile"
                             android:src="@drawable/man" />
 
                         <TextView
@@ -101,7 +103,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/backcard"
 
                 android:orientation="vertical">
@@ -115,12 +117,23 @@
                     android:textColor="@color/white"
                     android:textSize="35sp" />
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp">
+                <TextClock
 
-                </com.github.mikephil.charting.charts.PieChart>
+                    android:id="@+id/textClock"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+
+                    android:format24Hour="HH:mm:ss"
+
+                    android:padding="2dp"
+
+                    android:textAlignment="center"
+
+                    android:textColor="@color/white"
+
+                    android:textSize="50dp" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -158,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Today"
+                    android:text="Reminders"
                     android:textColor="#DCA900"
 
                     android:textSize="20sp"
@@ -169,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="Next 7 Day"
+                    android:text="Next 7 Days"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="14sp"
