@@ -48,13 +48,14 @@ public class NotesActivity extends AppCompatActivity {
         String[] notesArray = savedText.split("\n");
         adapter.addAll(new ArrayList<>(Arrays.asList(notesArray)));
 
+        //Here notes are added from the top playing a success sound
         Submit = findViewById(R.id.submitNote);
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String note = inputText.getText().toString().trim();
                 if (!note.isEmpty()) {
-                    adapter.add(note);
+                    adapter.insert(note, 0);
                     inputText.setText("");
                     playSuccessSound();
                     saveNotesToSharedPreferences();
@@ -77,7 +78,6 @@ public class NotesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace 'NotesActivity' with the name of your activity or fragment class
                 Intent intent = new Intent(NotesActivity.this, ReminderActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
@@ -87,8 +87,6 @@ public class NotesActivity extends AppCompatActivity {
 
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
-                // Handle click on home item
-                // You can start the new activity like this:
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 playmenuSuccessSound();
@@ -103,16 +101,12 @@ public class NotesActivity extends AppCompatActivity {
                 playmenuSuccessSound();
                 return true;
             } else if (item.getItemId() == R.id.settings) {
-                // Handle click on settings item
-                // Start another activity similarly
                 Intent settingsIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingsIntent);
                 overridePendingTransition(R.anim.screen_slide_right,R.anim.screen_slide_left);
                 playmenuSuccessSound();
                 return true;
             }
-
-            // Add conditions for other items if needed
             return false;
         });
     }
@@ -122,7 +116,6 @@ public class NotesActivity extends AppCompatActivity {
         for (int i = 0; i < adapter.getCount(); i++) {
             updatedText.append(adapter.getItem(i)).append("\n");
         }
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("savedText", updatedText.toString().trim());
         editor.apply();
@@ -132,7 +125,6 @@ public class NotesActivity extends AppCompatActivity {
     public void finish(){
         super.finish();
         overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
-
     }
 
     private void playSuccessSound() {
@@ -144,5 +136,4 @@ public class NotesActivity extends AppCompatActivity {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
         mediaPlayer.start();
     }
-
 }
