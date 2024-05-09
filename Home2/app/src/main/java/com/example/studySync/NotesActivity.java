@@ -63,6 +63,7 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
+        //This function allows a note to be edited in the textbox
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -85,6 +86,7 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
+        //This section is to do with the navigation bar at the bottom
         binding.bottomnavigation.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 Intent homeIntent = new Intent(this, DashboardActivity.class);
@@ -111,6 +113,7 @@ public class NotesActivity extends AppCompatActivity {
         });
     }
 
+    //sharedPreferences is where notes are saved so that they persist when the app is next run.
     private void saveNotesToSharedPreferences() {
         StringBuilder updatedText = new StringBuilder();
         for (int i = 0; i < adapter.getCount(); i++) {
@@ -121,12 +124,14 @@ public class NotesActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    //standard transition for all pages
     @Override
     public void finish(){
         super.finish();
         overridePendingTransition(R.anim.screen_slide_left,R.anim.screen_slide_out_right);
     }
 
+    //successSound function called when a note is submitted and saved
     private void playSuccessSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.page);
         mediaPlayer.start();
