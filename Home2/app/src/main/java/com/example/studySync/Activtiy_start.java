@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Activtiy_start extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
