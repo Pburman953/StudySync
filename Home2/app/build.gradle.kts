@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace = "com.example.studySync"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.studySync"
-        minSdk = 33
+        minSdk = 27
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -37,10 +37,10 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.5.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment:2.3.5")
-    implementation("androidx.navigation:navigation-ui:2.3.5")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
     implementation(files("MPAndroidChart-v3.0.1.jar"))
     implementation(files("MPAndroidChart-v3.0.1.jar"))
     implementation(files("MPAndroidChart-v3.0.1.jar"))
@@ -48,8 +48,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.android.volley:volley:1.2.1")
-    implementation ("com.google.android.material:material:1.3.0-alpha04")
-    implementation("com.google.code.gson:gson:2.8.8")
+    implementation ("com.google.android.material:material:1.12.0")
+    implementation("com.google.code.gson:gson:2.11.0")
 
 
 
