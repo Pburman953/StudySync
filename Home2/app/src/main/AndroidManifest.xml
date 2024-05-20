@@ -23,7 +23,7 @@
         <receiver
             android:name=".ReminderReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true"/>
         <activity
             android:name=".RegisterPage"
             android:exported="false" />
@@ -33,9 +33,6 @@
 
         <activity
             android:name=".Tracker"
-            android:exported="false" />
-        <activity
-            android:name=".test"
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"
