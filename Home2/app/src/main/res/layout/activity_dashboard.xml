@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DashboardActivity">
 
 
     <FrameLayout
@@ -13,11 +13,6 @@
         android:id="@+id/framelayout"
         style="@style/Screen"
         />
-
-
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -198,39 +193,31 @@
 
         </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/container" />
+
+    <!-- BottomAppBar with BottomNavigationView -->
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomappbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomappbar"
         android:layout_gravity="bottom"
         app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="50dp">
+        app:fabCradleRoundedCornerRadius="50dp"
+        app:fabAlignmentMode="center"
+        android:backgroundTint="@color/white">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/bottomnavigation"
-            android:layout_marginEnd="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
-            app:menu="@menu/bottom_menu">
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+            app:menu="@menu/bottom_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:contentDescription="TODO"
-        android:src="@drawable/baseline_add_24"
-        app:layout_anchor="@+id/bottomappbar"
-        app:layout_anchorGravity="top|center"
-        app:maxImageSize="40dp"
-        app:tint="@color/lavender" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

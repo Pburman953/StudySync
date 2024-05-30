@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/home"
-        android:title="home"
+        android:title="Home"
         android:icon="@drawable/baseline_home_24"/>
 
 
@@ -13,9 +13,10 @@
         android:icon="@drawable/baseline_event_note_24"/>
 
     <item
-        android:id="@+id/fab"
-        android:title=""
-        android:enabled="true"/>
+        android:id="@+id/Reminders"
+        android:title="Reminders"
+        android:icon="@drawable/baseline_add_24"/>
+
     <item
         android:id="@+id/tracker"
         android:title="Tracker"

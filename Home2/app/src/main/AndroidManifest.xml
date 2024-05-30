@@ -74,9 +74,6 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.Home" />
 
-        <activity
-            android:name=".navtest"
-            android:exported="true" />
     </application>
 
 </manifest>
