@@ -1,5 +1,7 @@
 package com.example.studySync;
 
+import static com.google.gson.internal.bind.util.ISO8601Utils.format;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -19,8 +21,12 @@ import com.example.studySync.databinding.ActivityNotesBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NotesActivity extends AppCompatActivity {
 
@@ -39,11 +45,11 @@ public class NotesActivity extends AppCompatActivity {
         binding = ActivityNotesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        inputText = findViewById(R.id.editText);
+        inputText = findViewById(R.id.editTextNote);
         noteListView = findViewById(R.id.noteListView);
         noteListView.setNestedScrollingEnabled(true);
 
-        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("NotesPref", MODE_PRIVATE);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         noteListView.setAdapter(adapter);
@@ -57,13 +63,7 @@ public class NotesActivity extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String note = inputText.getText().toString().trim();
-                if (!note.isEmpty()) {
-                    adapter.insert(note, 0);
-                    inputText.setText("");
-                    playSuccessSound();
-                    saveNotesToSharedPreferences();
-                }
+                createNote();
             }
         });
 
@@ -167,4 +167,25 @@ public class NotesActivity extends AppCompatActivity {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.menu);
         mediaPlayer.start();
     }
+
+    private void createNote(){
+        String noteText = inputText.getText().toString().trim();
+        Date createdAt = getCurrentDate();
+
+        if (!noteText.isEmpty()) {
+            adapter.insert(noteText, 0);
+            inputText.setText("");
+            playSuccessSound();
+            saveNotesToSharedPreferences();
+        }
+
+        Note newNote = new Note(noteText, createdAt);
+
+        Values.NotesList.add(newNote);
+    }
+
+    private Date getCurrentDate() {
+        return new Date();
+    }
+
 }

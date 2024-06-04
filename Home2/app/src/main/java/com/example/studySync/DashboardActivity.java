@@ -110,7 +110,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         int numButtons = Values.RemindersList.size();
-        if(Values.RemindersList.size() > 0) {
+        if(!Values.RemindersList.isEmpty()) {
             ButtonAdapter adapter = new ButtonAdapter(numButtons);
             recyclerView.setAdapter(adapter);
         }
@@ -205,7 +205,7 @@ public class DashboardActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal layout manager
 
         int numButtons = Values.RemindersList.size();
-        if(Values.RemindersList.size() > 0) {
+        if(!Values.RemindersList.isEmpty()) {
             ButtonAdapter adapter = new ButtonAdapter(numButtons);
             recyclerView.setAdapter(adapter);
         }

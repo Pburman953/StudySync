@@ -8,5 +8,7 @@ public class Values {
 
     public static String totalScreenTime;
 
+    public static ArrayList<Note> NotesList = new ArrayList<>();
+
 
 }
