@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -186,8 +187,12 @@ public class Tracker extends AppCompatActivity {
 
     // Display the app usage stats in the ListView
     private void displayAppUsageStats() {
+        long startTime = getStartOfDayMillis();
+        long endTime = getEndOfDayMillis();
         UsageStatsManager usageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0, System.currentTimeMillis());
+        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime);
+
+
 
         List<PieEntry> entries = new ArrayList<>();
         List<String> labels = new ArrayList<>();
@@ -197,6 +202,8 @@ public class Tracker extends AppCompatActivity {
         for (int i = 0; i < stats.size(); i++) {
             UsageStats usageStats = stats.get(i);
             String packageName = usageStats.getPackageName();
+            String simplifiedName = simplifyPackageName(packageName);
+
             float totalTimeInForeground = usageStats.getTotalTimeInForeground();
             totalTimeInForeground = totalTimeInForeground / 60000;
             if (totalTimeInForeground > 1) {
@@ -225,6 +232,47 @@ public class Tracker extends AppCompatActivity {
 
         Values.totalScreenTime = totaltime.toString();
 
+    }
+
+    public static String simplifyPackageName(String packageName) {
+        // Remove common prefixes
+        packageName = packageName.replace("com.android.", "")
+                .replace("com.google.", "")
+                .replace("com.", "")
+                .replace("org.", "")
+                .replace("net.", "");
+
+        // Use the last part of the package name
+        String[] parts = packageName.split("\\.");
+        if (parts.length > 1) {
+            packageName = parts[parts.length - 1];
+        }
+        return capitalize(packageName);
+    }
+
+    private static String capitalize(String str) {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    public static long getStartOfDayMillis() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getEndOfDayMillis() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar.getTimeInMillis();
     }
 
     private void applyFontSize(TextView textView) {
