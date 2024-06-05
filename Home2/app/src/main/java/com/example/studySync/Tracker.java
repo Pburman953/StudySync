@@ -213,7 +213,7 @@ public class Tracker extends AppCompatActivity {
                 totaltime = (int) (totaltime + totalTimeInForeground);
             }
         }
-        list1.add("Total Screen Time = " + totaltime.toString());
+        list1.add("Total Screen Time = " + totaltime.toString() + " minutes");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list1);
         listView.setAdapter(adapter);
         chart.getDescription().setEnabled(false); // Disable description
