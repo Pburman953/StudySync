@@ -7,6 +7,37 @@
     tools:context=".DashboardActivity">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/Screen"
+        android:id="@+id/framelayout"/>
+
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/backcard"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+
+
 
     <!-- TextView to display booking history -->
     <TextView
@@ -17,6 +48,9 @@
         android:text="Reminders:"
         android:textSize="34sp"
         android:textStyle="bold" />
+
+    </LinearLayout>
+
 
 
     <ScrollView
@@ -32,9 +66,18 @@
 
             <!-- Dynamically added buttons will be placed here -->
 
+
         </LinearLayout>
 
+
+
     </ScrollView>
+
+
+    </LinearLayout>
+
+
+
 
 
     <!-- BottomAppBar with BottomNavigationView -->
@@ -46,7 +89,7 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
         app:fabAlignmentMode="center"
-        android:backgroundTint="@color/white">
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
