@@ -9,6 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/Screen"
         android:id="@+id/framelayout"/>
 
 
@@ -17,7 +18,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/man"
+
         >
 
 
@@ -190,7 +191,7 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
         app:fabAlignmentMode="center"
-        android:backgroundTint="@color/white">
+        >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnavigation"
